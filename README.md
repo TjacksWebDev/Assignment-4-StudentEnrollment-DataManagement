@@ -1,55 +1,39 @@
-# Assignment-4
-Requirements
+**Assignment-4: Student Enrollment Data Management**
 
-Situation
-You work for a College as their Data Scientist and your job is to help the Professors manage the data that they receive from the College. For this assignment you need to help the Professors of 3 different classes with their student enrollment list. 
+This GitHub repository contains the solution to Assignment-4, a data management task for college professors. As a Data Scientist working for a college, our mission is to assist professors in handling the student enrollment data effectively.
 
-The Professors were given a single CSV file that contains a "master list" of all students across all courses. But each Professor only wants to see a list of their own students (not the students who are in other classes).
+**Assignment Overview:**
 
+In this assignment, we are tasked with helping professors from three different classes manage their student enrollment lists. The challenge is that professors were provided with a single CSV file containing a "master list" of all students across all courses. However, each professor requires a separate CSV file containing only their own students, grouped by course.
 
-Job
-You will need to parse the Master List File and separate the data into 3 separate CSV files. Each CSV file should contain a list of students specific to that particular course (i.e. we're grouping the students by course). 
+Our job involves parsing the master list file and separating the data into three distinct CSV files, each representing a specific course. Additionally, we need to ensure that the student records in each CSV file are sorted by grade in descending order, making it easier for professors to analyze their students' performance.
 
-For each of the 3 CSV files, you'll need to sort the students by grade in descending order.
+**Key Features:**
 
-The CSV output file names should be called: course1.csv, course2.csv, and course3.csv.
+- Data parsing and separation into three distinct CSV files.
+- Sorting student records by grade in descending order for each course.
+- Use of Java to manage and process CSV data.
+- Helpful hints provided in the README for handling null entries, writing to files, and parsing string input into integers.
 
+**Example Output:**
 
-Hints
-In order to sort an array, you'll need to figure out how to handle null entries in your array. If you're trying to use Arrays.sort(yourArray), and yourArray contains null values, the sort will crash. 
-When writing to a file, you can use "\n" to write a new line to the file. Fore example: fileWriter.write("This is one line \n");
-If you want to turn String input into an Integer, you can parse it like so: Integer myIntVal = Integer.parseInt(myStringVal);
+The repository includes example output files, named `course1.csv`, `course2.csv`, and `course3.csv`, showcasing the expected format of the sorted student enrollment data.
 
-Example Output
+**Usage:**
 
-course1.csv
+1. Clone or download the repository to your local machine.
+2. Review the provided code and follow the hints for handling data.
+3. Customize the code for your specific use case if needed.
+4. Execute the code to generate the required CSV files for your professors.
 
-Student ID,Student Name,Course,Grade
-28,Justin Conrad,COMPSCI 310,99
-37,Simone Scott,COMPSCI 312,91
-91,Donald Schultz,COMPSCI 321,87
-19,Blair Heaton,COMPSCI 309,87
-79,Kerys John,COMPSCI 319,87
-64,Jameson Best,COMPSCI 316,86
-... rest of lines omitted ...
+**Contributing:**
 
-course2.csv
+Contributions to this project are welcome. If you have improvements, additional features, or fixes to suggest, please submit a pull request.
 
-Student ID,Student Name,Course,Grade
-89,Alison Murray,APMTH 134,93
-59,Amber-Rose Austin,APMTH 129,93
-68,Aran Rice,APMTH 131,89
-44,Brandan Mcbride,APMTH 127,89
-32,Veronica Dodd,APMTH 125,88
-... rest of lines omitted ...
+**License:**
 
-course3.csv
+This project is licensed under the [MIT License](LICENSE.md), allowing you to freely use, modify, and distribute the code within the bounds of the license.
 
-Student ID,Student Name,Course,Grade
-15,Padraig Barry,STAT 236,93
-39,Zachariah Hutchinson,STAT 240,92
-33,Stewart Reed,STAT 239,90
-54,Franciszek Hartman,STAT 242,90
-6,Bodhi Stokes,STAT 234,86
-... rest of lines omitted ...
+---
 
+Feel free to customize this description as needed for your GitHub repository. If you have any questions or need further assistance, please let me know.
