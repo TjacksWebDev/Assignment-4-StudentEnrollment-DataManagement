@@ -5,54 +5,55 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 
 public class StudentListApp {
-
     public static void main(String[] args) {
         // Read the master list file
-        List<String> lines = readMasterList("masterlist.csv");
+        String[] lines = readMasterList("masterlist.csv");
 
-        // Separate the data into three lists based on courses
-        List<String> course1List = new ArrayList<>();
-        List<String> course2List = new ArrayList<>();
-        List<String> course3List = new ArrayList<>();
+        // Separate the data into three arrays based on courses
+        String[] course1List = new String[lines.length];
+        String[] course2List = new String[lines.length];
+        String[] course3List = new String[lines.length];
+
+        int course1Count = 0;
+        int course2Count = 0;
+        int course3Count = 0;
 
         for (String line : lines) {
             String[] data = line.split(",");
             String course = data[2];
 
             if (course.startsWith("COMPSCI")) {
-                course1List.add(line);
+                course1List[course1Count++] = line;
             } else if (course.startsWith("APMTH")) {
-                course2List.add(line);
+                course2List[course2Count++] = line;
             } else if (course.startsWith("STAT")) {
-                course3List.add(line);
+                course3List[course3Count++] = line;
             }
         }
 
-        // Sort the student lists by grade in descending order if they are not empty
-        if (!course1List.isEmpty()) {
-            sortListByGrade(course1List);
+        // Sort the student arrays by grade in descending order if they are not empty
+        if (course1Count > 0) {
+            sortArrayByGrade(course1List, course1Count);
         }
-        if (!course2List.isEmpty()) {
-            sortListByGrade(course2List);
+        if (course2Count > 0) {
+            sortArrayByGrade(course2List, course2Count);
         }
-        if (!course3List.isEmpty()) {
-            sortListByGrade(course3List);
+        if (course3Count > 0) {
+            sortArrayByGrade(course3List, course3Count);
         }
 
-        // Write the separated and sorted lists to CSV files
-        writeToFile("course1.csv", course1List);
-        writeToFile("course2.csv", course2List);
-        writeToFile("course3.csv", course3List);
+        // Write the separated and sorted arrays to CSV files
+        writeToFile("course1.csv", course1List, course1Count);
+        writeToFile("course2.csv", course2List, course2Count);
+        writeToFile("course3.csv", course3List, course3Count);
     }
 
-    private static void sortListByGrade(List<String> studentList) {
-        Collections.sort(studentList, new Comparator<String>() {
+    private static void sortArrayByGrade(String[] studentArray, int count) {
+        Arrays.sort(studentArray, 0, count, new Comparator<String>() {
             @Override
             public int compare(String student1, String student2) {
                 // Split and parse the grade for comparison
@@ -65,26 +66,29 @@ public class StudentListApp {
         });
     }
 
-    public static List<String> readMasterList(String filename) {
-        List<String> lines = new ArrayList<>();
+    public static String[] readMasterList(String filename) {
+        String[] lines = new String[1000]; // Assuming a maximum of 1000 lines
+
+        int lineCount = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader("masterslist.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                lines.add(line);
+                lines[lineCount++] = line;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return lines;
+        // Trim the array to the actual number of lines read
+        return Arrays.copyOf(lines, lineCount);
     }
 
-    public static void writeToFile(String filename, List<String> studentList) {
+    public static void writeToFile(String filename, String[] studentArray, int count) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             writer.write("Student ID,Student Name,Course,Grade\n");
-            for (String studentData : studentList) {
-                writer.write(studentData + "\n");
+            for (int i = 0; i < count; i++) {
+                writer.write(studentArray[i] + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
